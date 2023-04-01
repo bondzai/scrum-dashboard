@@ -30,6 +30,11 @@ const CustomTable = () => {
                 header: 'Task',
             },
             {
+                accessorKey: 'status',
+                header: 'Status',
+                size: 60,
+            },
+            {
                 accessorKey: 'dev',
                 header: 'Dev',
                 size: 60,
