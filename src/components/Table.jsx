@@ -18,10 +18,12 @@ const CustomTable = () => {
             {
                 accessorKey: 'date',
                 header: 'Date',
+                size: 50,
             },
             {
                 accessorKey: 'platform',
                 header: 'Platform',
+                size: 40,
             },
             {
                 accessorKey: 'description',
@@ -30,6 +32,7 @@ const CustomTable = () => {
             {
                 accessorKey: 'dev',
                 header: 'Dev',
+                size: 60,
             },
             {
                 accessorKey: 'remark',
@@ -39,7 +42,30 @@ const CustomTable = () => {
         [data],
     );
 
-    return <MaterialReactTable columns={columns} data={data} />;
+    const formattedData = useMemo(() => {
+        return data.map((item) => ({
+            ...item,
+            date: moment(item.date).format("DD MMMM"),
+        }));
+    }, [data]);
+
+    return (
+        <MaterialReactTable
+            columns={columns}
+            data={formattedData}
+            rowsPerPage={20}
+            initialState={{
+                sorting: [
+                    {
+                        id: 'date',
+                        desc: true,
+                    },
+                ],
+                pagination: { pageSize: 25},
+                density: 'compact'
+            }}
+        />
+    );
 };
 
 export default CustomTable;
