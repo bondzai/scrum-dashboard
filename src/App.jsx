@@ -1,12 +1,12 @@
 import './App.css'
-import Table from './components/Table'
+import CustomTable from './components/Table'
 
 function App() {
     return (
         <div className="App">
             <h1> Scrum </h1>
             <div>
-                <Table/>
+                <CustomTable/>
             </div>
         </div>
     )
