@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import CustomTable from './components/Table'
 
 function App() {
-    const [count, setCount] = useState(0)
-
     return (
         <div className="App">
-            <h1> James-Bond Investment Dashboard </h1>
+            <h1> Swift-Scrum </h1>
+            <div>
+                <CustomTable/>
+            </div>
         </div>
     )
 }
