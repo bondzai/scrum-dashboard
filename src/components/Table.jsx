@@ -1,43 +1,47 @@
-import React, { useMemo } from "react";
-import { useTable } from "react-table";
-import { COLUMNS, DATA } from "./data"; // import your columns and data
+import React, { useState, useEffect, useMemo } from "react";
+import axios from "axios";
+import moment from "moment";
 
 function Table() {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => DATA, []);
+    const [data, setData] = useState([]);
 
-  const tableInstance = useTable({ columns, data });
+    useEffect(() => {
+        axios
+            .get("https://script.google.com/macros/s/AKfycbxXkIYhmC4EpXON-wpmfKyOGtSeJyFdqiu4RrYJb7GYdF_DxZzxEyVWmbIwB0sSPFJa/exec?action=readData")
+            .then((response) => setData(response.data))
+            .catch((error) => console.log(error));
+    }, []);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
-
-  return (
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                );
-              })}
+    const rows = useMemo(() => {
+        return data.map((item, index) => (
+            <tr key={index}>
+                <td>{moment(item.date).format("MMM Do YY")}</td>
+                <td>{item.platform}</td>
+                <td>{item.description}</td>
+                <td>{item.status}</td>
+                <td>{item.dev}</td>
+                <td>{item.remark}</td>
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
+        ));
+    }, [data]);
+
+    return (
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>DATE</th>
+                        <th>PLATFORM</th>
+                        <th>DESCRIPTION</th>
+                        <th>STATUS</th>
+                        <th>DEV</th>
+                        <th>REMARK</th>
+                    </tr>
+                </thead>
+                <tbody>{rows}</tbody>
+            </table>
+        </div>
+    );
 }
 
 export default Table;
