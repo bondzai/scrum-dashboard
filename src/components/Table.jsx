@@ -26,8 +26,8 @@ const CustomTable = () => {
                 size: 40,
             },
             {
-                accessorKey: 'description',
-                header: 'Description',
+                accessorKey: 'task',
+                header: 'Task',
             },
             {
                 accessorKey: 'dev',
