@@ -8,7 +8,6 @@ const Scrum = () => {
             <div className="about">
                 <h1> DAILY SCRUM DATA </h1>
                 <ScrumTable />
-                <p> &copy; FOR SWD-DEV TEAM </p>
             </div>
         </div>
     )

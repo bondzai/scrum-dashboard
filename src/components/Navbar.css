@@ -24,6 +24,10 @@ body {
     position: relative;
 }
 
+.logo {
+    font-weight: 600;
+    color: #333333;
+}
 
 .menu-icon {
     display: none;
