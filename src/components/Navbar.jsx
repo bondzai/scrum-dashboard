@@ -14,7 +14,7 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="container">
                 <div className="logo">
-                    SwiftDev
+                    &copy; SwiftDev
                 </div>
                 <div className="menu-icon" onClick={handleShowNavbar}>
                     <GiHamburgerMenu />
