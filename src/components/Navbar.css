@@ -62,6 +62,11 @@ body {
     background-color: #574c4c;
 }
 
+.nav-elements ul :hover {
+    transform: scale(1.1);
+    transition: 0.1s ease-in;
+}
+
 @media (max-width: 768px) {
     .nav-elements ul li:not(:last-child) {
         margin-right: 30px;

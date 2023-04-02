@@ -25,7 +25,7 @@ const Navbar = () => {
                             <NavLink to="/">DAILY SCRUM</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/report">DAILY REPORT  </NavLink>
+                            <NavLink to="https://report.labs-sapjarern.click/" target={"_blank"}> DAILY REPORT  </NavLink>
                         </li>
                     </ul>
                 </div>
