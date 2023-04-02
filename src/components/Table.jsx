@@ -111,7 +111,7 @@ const CustomTable = () => {
                         startIcon={<FileDownloadIcon />}
                         variant="contained"
                     >
-                        Export Selected Rows
+                        Export Selected Data
                     </Button>
                 </Box>
             )}
