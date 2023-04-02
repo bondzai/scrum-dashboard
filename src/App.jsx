@@ -1,13 +1,22 @@
 import './App.css'
-import CustomTable from './components/Table'
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar'
+import Scrum from './pages/Scrum';
 
 function App() {
     return (
-        <div className="App">
-            <h1> Scrum Data</h1>
-            <div>
-                <CustomTable/>
-            </div>
+        <div>
+            <Router>
+                <div className='Navigation'>
+                    <Navbar />
+                </div>
+                <div className="App">
+                    <Routes>
+                        <Route path='/' element={<Scrum />} />
+                    </Routes>
+                </div>
+            </Router>
         </div>
     )
 }
