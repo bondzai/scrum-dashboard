@@ -2,13 +2,18 @@ import MaterialReactTable from 'material-react-table';
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import moment from "moment";
+import { Box, Button } from '@mui/material';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { ExportToCsv } from 'export-to-csv';
+
 
 const CustomTable = () => {
+    const URL = import.meta.env.VITE_SHEET_URL
     const [data, setData] = useState([]);
 
     useEffect(() => {
         axios
-            .get("https://script.google.com/macros/s/AKfycbxXkIYhmC4EpXON-wpmfKyOGtSeJyFdqiu4RrYJb7GYdF_DxZzxEyVWmbIwB0sSPFJa/exec?action=readData")
+            .get(URL)
             .then((response) => setData(response.data))
             .catch((error) => console.log(error));
     }, []);
@@ -54,21 +59,62 @@ const CustomTable = () => {
         }));
     }, [data]);
 
+
+    const csvOptions = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalSeparator: '.',
+        showLabels: true,
+        useBom: true,
+        useKeysAsHeaders: false,
+        headers: columns.map((c) => c.header),
+    };
+
+    const csvExporter = new ExportToCsv(csvOptions);
+
+    const handleExportData = () => {
+        csvExporter.generateCsv(data);
+    };
+
+    const handleExportRows = (rows) => {
+        csvExporter.generateCsv(rows.map((row) => row.original));
+    };
+
     return (
         <MaterialReactTable
             columns={columns}
             data={formattedData}
-            rowsPerPage={20}
+            enableRowSelection
             initialState={{
                 sorting: [
-                    {
-                        id: 'date',
-                        desc: true,
-                    },
+                    { id: 'date', desc: true, },
                 ],
-                pagination: { pageSize: 25},
+                pagination: { pageSize: 25 },
                 density: 'compact'
             }}
+            renderTopToolbarCustomActions={({ table }) => (
+                <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
+                    <Button
+                        color="inherit"
+                        onClick={handleExportData}
+                        startIcon={<FileDownloadIcon />}
+                        variant="contained"
+                    >
+                        Export All Data
+                    </Button>
+                    <Button
+                        disabled={
+                            !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
+                        }
+                        color="inherit"
+                        onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
+                        startIcon={<FileDownloadIcon />}
+                        variant="contained"
+                    >
+                        Export Selected Rows
+                    </Button>
+                </Box>
+            )}
         />
     );
 };
