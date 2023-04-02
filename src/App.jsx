@@ -8,7 +8,9 @@ function App() {
     return (
         <div>
             <Router>
-                <Navbar />
+                <div className='Navigation'>
+                    <Navbar />
+                </div>
                 <div className="App">
                     <Routes>
                         <Route path='/' element={<Scrum />} />
