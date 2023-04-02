@@ -7,7 +7,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { ExportToCsv } from 'export-to-csv';
 
 
-const CustomTable = () => {
+const ScrumTable = () => {
     const URL = import.meta.env.VITE_SHEET_URL
     const [data, setData] = useState([]);
 
@@ -119,4 +119,4 @@ const CustomTable = () => {
     );
 };
 
-export default CustomTable;
+export default ScrumTable;
