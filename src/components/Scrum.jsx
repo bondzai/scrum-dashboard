@@ -55,7 +55,7 @@ const ScrumTable = () => {
     const formattedData = useMemo(() => {
         return data.map((item) => ({
             ...item,
-            date: moment(item.date).format("DD MMMM"),
+            date: moment(item.date).format("YYYY-MM-DD"),
         }));
     }, [data]);
 
