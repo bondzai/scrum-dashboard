@@ -59,7 +59,6 @@ const ScrumTable = () => {
         }));
     }, [data]);
 
-
     const csvOptions = {
         fieldSeparator: ',',
         quoteStrings: '"',
@@ -84,6 +83,7 @@ const ScrumTable = () => {
         <MaterialReactTable
             columns={columns}
             data={formattedData}
+            // state={{isLoading: isLoading}}
             enableRowSelection
             initialState={{
                 sorting: [
