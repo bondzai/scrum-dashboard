@@ -4,16 +4,22 @@ import axios from "axios";
 import moment from "moment";
 import { Box, Button } from '@mui/material';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { ExportToCsv } from 'export-to-csv';
 
 
 const ScrumTable = () => {
-    const URL = import.meta.env.VITE_SHEET_URL
+    const API_URL = import.meta.env.VITE_API_URL
+    const DATA_URL = import.meta.env.VITE_DATA_URL
     const [data, setData] = useState([]);
+
+    const openInNewTab = (e) => {
+        window.open(e, '_blank', 'noopener,noreferrer');
+    };
 
     useEffect(() => {
         axios
-            .get(URL)
+            .get(API_URL)
             .then((response) => setData(response.data))
             .catch((error) => console.log(error));
     }, []);
@@ -59,7 +65,6 @@ const ScrumTable = () => {
         }));
     }, [data]);
 
-
     const csvOptions = {
         fieldSeparator: ',',
         quoteStrings: '"',
@@ -84,6 +89,7 @@ const ScrumTable = () => {
         <MaterialReactTable
             columns={columns}
             data={formattedData}
+            // state={{isLoading: isLoading}}
             enableRowSelection
             initialState={{
                 sorting: [
@@ -96,11 +102,20 @@ const ScrumTable = () => {
                 <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
                     <Button
                         color="inherit"
+                        DATA
+                        onClick={() => openInNewTab(DATA_URL)}
+                        startIcon={<ModeEditIcon />}
+                        variant="contained"
+                    >
+                        Edit
+                    </Button>
+                    <Button
+                        color="inherit"
                         onClick={handleExportData}
                         startIcon={<FileDownloadIcon />}
                         variant="contained"
                     >
-                        Export All Data
+                        Export All
                     </Button>
                     <Button
                         disabled={
@@ -111,7 +126,7 @@ const ScrumTable = () => {
                         startIcon={<FileDownloadIcon />}
                         variant="contained"
                     >
-                        Export Selected Data
+                        Export Selected
                     </Button>
                 </Box>
             )}
