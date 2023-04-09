@@ -15,7 +15,7 @@ function App() {
                     <Routes>
                         <Route path='/' element={<Scrum />} />
                     </Routes>
-                    <p> &copy; FOR SWD-DEV TEAM </p>    
+                    <p> &copy; FOR SWD-DEV TEAM </p>
                 </div>
             </Router>
         </div>
