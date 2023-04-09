@@ -3,9 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import moment from "moment";
 import { Box, Button } from '@mui/material';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import { ExportToCsv } from 'export-to-csv';
 
 
 const ScrumTable = () => {
@@ -69,7 +67,6 @@ const ScrumTable = () => {
         <MaterialReactTable
             columns={columns}
             data={formattedData}
-            enableRowSelection
             initialState={{
                 sorting: [
                     { id: 'date', desc: true, },
@@ -81,7 +78,6 @@ const ScrumTable = () => {
                 <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
                     <Button
                         color="inherit"
-                        DATA
                         onClick={() => openInNewTab(DATA_URL)}
                         startIcon={<ModeEditIcon />}
                         variant="contained"
