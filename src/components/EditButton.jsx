@@ -40,7 +40,7 @@ const ModalPassphrase = ({ open, onClose }) => {
         if (dataUrl) {
             onClose();
             openWindow(dataUrl);
-            setDataUrl('')
+            setDataUrl('');
         }
     }, [dataUrl, onClose]);
 
@@ -51,7 +51,7 @@ const ModalPassphrase = ({ open, onClose }) => {
             }, 0);
         } else {
             setError(false);
-            setDataUrl('')
+            setDataUrl('');
         }
     }, [open]);
 
