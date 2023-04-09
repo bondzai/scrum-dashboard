@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { Button, Modal, Box, TextField } from '@mui/material';
 
-const SimpleModal = ({ open, onClose }) => {
-    console.log("start")
-    console.log(open)
+const ModalPassphrase = ({ open, onClose }) => {
     const [passphrase, setPassphrase] = useState('');
     const [error, setError] = useState(false);
+    const [dataUrl, setDataUrl] = useState('');
+    const inputRef = useRef(null);
 
-    const DATA_URL = import.meta.env.VITE_DATA_URL
+    const DATA_URL = import.meta.env.VITE_DATA_URL;
+    const PASSPHRASE = import.meta.env.VITE_PASSPHRASE;
 
-    const openWindow = (e) => {
-        window.open(e, '_self');
+    const openWindow = (url) => {
+        window.open(url, '_blank');
     };
 
     const handleChange = (event) => {
@@ -26,20 +27,36 @@ const SimpleModal = ({ open, onClose }) => {
     };
 
     const handleConfirm = () => {
-        if (passphrase === import.meta.env.VITE_PASSPHRASE) {
+        if (passphrase === PASSPHRASE) {
             alert('Welcome');
-            openWindow(DATA_URL);
+            setDataUrl(DATA_URL);
         } else {
             setError(true);
         }
         setPassphrase('');
     };
 
+    useEffect(() => {
+        if (dataUrl) {
+            onClose();
+            openWindow(dataUrl);
+            setDataUrl('');
+        }
+    }, [dataUrl, onClose]);
+
+    useEffect(() => {
+        if (open) {
+            setTimeout(() => {
+                inputRef.current.focus();
+            }, 0);
+        } else {
+            setError(false);
+            setDataUrl('');
+        }
+    }, [open]);
+
     return (
-        <Modal
-            open={open}
-            onClose={onClose}
-        >
+        <Modal open={open} onClose={onClose}>
             <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', bgcolor: 'background.paper', boxShadow: 24, p: 4, display: 'flex', gap: '1rem', flexDirection: 'column' }}>
                 <TextField
                     error={error}
@@ -50,16 +67,11 @@ const SimpleModal = ({ open, onClose }) => {
                     value={passphrase}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
+                    inputRef={inputRef}
                 />
-                <Button
-                    color="primary"
-                    onClick={handleConfirm}
-                    variant="contained"
-                >
-                    Confirm
-                </Button>
+                <Button color="primary" onClick={handleConfirm} variant="contained">Confirm</Button>
             </Box>
-        </Modal >
+        </Modal>
     );
 };
 
@@ -76,15 +88,8 @@ const EditButton = () => {
 
     return (
         <div>
-            <Button
-                color="inherit"
-                onClick={handleOpen}
-                startIcon={<ModeEditIcon />}
-                variant="contained"
-            >
-                Edit
-            </Button>
-            <SimpleModal open={open} onClose={handleClose} />
+            <Button color="inherit" onClick={handleOpen} startIcon={<ModeEditIcon />} variant="contained">Edit</Button>
+            <ModalPassphrase open={open} onClose={handleClose} />
         </div>
     );
 };
