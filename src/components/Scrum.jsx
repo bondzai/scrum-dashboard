@@ -2,18 +2,13 @@ import MaterialReactTable from 'material-react-table';
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import moment from "moment";
-import { Box, Button } from '@mui/material';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { Box } from '@mui/material';
+import EditButton from './EditButton';
 
 
 const ScrumTable = () => {
     const API_URL = import.meta.env.VITE_API_URL
-    const DATA_URL = import.meta.env.VITE_DATA_URL
     const [data, setData] = useState([]);
-
-    const openInNewTab = (e) => {
-        window.open(e, '_blank', 'noopener,noreferrer');
-    };
 
     useEffect(() => {
         axios
@@ -76,14 +71,7 @@ const ScrumTable = () => {
             }}
             renderTopToolbarCustomActions={({ table }) => (
                 <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
-                    <Button
-                        color="inherit"
-                        onClick={() => openInNewTab(DATA_URL)}
-                        startIcon={<ModeEditIcon />}
-                        variant="contained"
-                    >
-                        Edit
-                    </Button>
+                    <EditButton />
                 </Box>
             )}
         />
