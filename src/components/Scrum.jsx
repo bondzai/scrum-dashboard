@@ -65,26 +65,6 @@ const ScrumTable = () => {
         }));
     }, [data]);
 
-    const csvOptions = {
-        fieldSeparator: ',',
-        quoteStrings: '"',
-        decimalSeparator: '.',
-        showLabels: true,
-        useBom: true,
-        useKeysAsHeaders: false,
-        headers: columns.map((c) => c.header),
-    };
-
-    const csvExporter = new ExportToCsv(csvOptions);
-
-    const handleExportData = () => {
-        csvExporter.generateCsv(data);
-    };
-
-    const handleExportRows = (rows) => {
-        csvExporter.generateCsv(rows.map((row) => row.original));
-    };
-
     return (
         <MaterialReactTable
             columns={columns}
@@ -107,25 +87,6 @@ const ScrumTable = () => {
                         variant="contained"
                     >
                         Edit
-                    </Button>
-                    <Button
-                        color="inherit"
-                        onClick={handleExportData}
-                        startIcon={<FileDownloadIcon />}
-                        variant="contained"
-                    >
-                        Export All
-                    </Button>
-                    <Button
-                        disabled={
-                            !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
-                        }
-                        color="inherit"
-                        onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-                        startIcon={<FileDownloadIcon />}
-                        variant="contained"
-                    >
-                        Export Selected
                     </Button>
                 </Box>
             )}
