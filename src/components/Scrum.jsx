@@ -89,7 +89,6 @@ const ScrumTable = () => {
         <MaterialReactTable
             columns={columns}
             data={formattedData}
-            // state={{isLoading: isLoading}}
             enableRowSelection
             initialState={{
                 sorting: [
