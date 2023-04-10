@@ -72,6 +72,7 @@ const ScrumTable = () => {
             renderTopToolbarCustomActions={({ table }) => (
                 <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
                     <EditButton />
+                    *** Automatically purge data that is older than 2 days.    
                 </Box>
             )}
         />

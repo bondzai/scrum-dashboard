@@ -88,7 +88,7 @@ const EditButton = () => {
 
     return (
         <div>
-            <Button color="inherit" onClick={handleOpen} startIcon={<ModeEditIcon />} variant="contained">Edit</Button>
+            <Button color="inherit" onClick={handleOpen} startIcon={<ModeEditIcon />} variant="contained">Edit Data</Button>
             <ModalPassphrase open={open} onClose={handleClose} />
         </div>
     );
