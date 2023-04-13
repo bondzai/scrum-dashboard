@@ -1,23 +1,19 @@
-import './App.css'
-
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar'
 import Scrum from './pages/Scrum';
+import Sidebar from "./components/Sidebar";
 
 function App() {
+    const [isSidebar, setIsSidebar] = useState(true);
+
     return (
-        <div>
-            <Router>
-                <div className='Navigation'>
-                    <Navbar />
-                </div>
-                <div className="App">
-                    <Routes>
-                        <Route path='/' element={<Scrum />} />
-                    </Routes>
-                    <p> &copy; FOR SWD-DEV TEAM </p>
-                </div>
-            </Router>
+        <div className="app">
+            <Sidebar isSidebar={isSidebar} />
+            <main className="content">
+                <Routes>
+                    <Route path="/" element={<Scrum />} />
+                </Routes>
+            </main>
         </div>
     )
 }
