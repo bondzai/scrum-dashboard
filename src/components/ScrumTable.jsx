@@ -41,21 +41,26 @@ const ScrumTable = () => {
                 size: 60,
                 Cell: ({ cell }) => {
                     const value = cell.getValue();
-                    let color = '';
+                    let color;
                     let icon;
-                    if (value === 'In progress') {
-                        icon = <AutorenewIcon/>
-                        color = 'orange';
-                    } else if (value === 'Done') {
-                        icon = <CheckCircleOutlineIcon/>
+                    if (value === 'Done') {
+                        icon = <CheckCircleOutlineIcon />;
                         color = 'green';
+                    } else if (value === 'In progress') {
+                        icon = <AutorenewIcon />;
+                        color = 'orange';
                     } else if (value === 'Pending') {
-                        icon = <PendingActionsIcon/>
+                        icon = <PendingActionsIcon />;
                         color = 'red';
                     } else {
                         color = 'black';
                     }
-                    return <div style={{ color }}> {icon} {value} </div>;
+                    return (
+                        <div style={{ color, display: 'flex', alignItems: 'center' }}>
+                            {icon}
+                            <span style={{ marginLeft: '0.5rem' }}>{value}</span>
+                        </div>
+                    );
                 },
             },
             {
