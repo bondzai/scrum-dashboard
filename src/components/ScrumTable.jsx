@@ -37,6 +37,20 @@ const ScrumTable = () => {
                 accessorKey: 'status',
                 header: 'Status',
                 size: 60,
+                Cell: ({ cell }) => {
+                    const value = cell.getValue();
+                    let color;
+                    if (value === 'In progress') {
+                        color = 'orange';
+                    } else if (value === 'Done') {
+                        color = 'green';
+                    } else if (value === 'Pending') {
+                        color = 'red';
+                    } else {
+                        color = 'black';
+                    }
+                    return <div style={{ color }}> {value} </div>;
+                },
             },
             {
                 accessorKey: 'dev',
@@ -73,7 +87,7 @@ const ScrumTable = () => {
             renderTopToolbarCustomActions={({ table }) => (
                 <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
                     <EditButton />
-                    *** Automatically purge data every Sunday.    
+                    *** Automatically purge data every Sunday.
                 </Box>
             )}
         />

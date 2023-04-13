@@ -1,5 +1,5 @@
 import React from "react";
-import ScrumTable from "../components/Scrum";
+import ScrumTable from "../components/ScrumTable";
 
 const Scrum = () => {
 
