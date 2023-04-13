@@ -62,17 +62,18 @@ const ScrumTable = () => {
         <MaterialReactTable
             columns={columns}
             data={formattedData}
+            enablePinning
             initialState={{
                 sorting: [
                     { id: 'date', desc: true, },
                 ],
                 pagination: { pageSize: 25 },
-                density: 'compact'
+                density: 'compact',
             }}
             renderTopToolbarCustomActions={({ table }) => (
                 <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}>
                     <EditButton />
-                    *** Automatically purge data every Sunday(midnight to 1 AM).    
+                    *** Automatically purge data every Sunday.    
                 </Box>
             )}
         />
