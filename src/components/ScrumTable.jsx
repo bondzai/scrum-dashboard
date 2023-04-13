@@ -4,7 +4,9 @@ import axios from "axios";
 import moment from "moment";
 import { Box } from '@mui/material';
 import EditButton from './EditButton';
-
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
 
 const ScrumTable = () => {
     const API_URL = import.meta.env.VITE_API_URL
@@ -39,17 +41,21 @@ const ScrumTable = () => {
                 size: 60,
                 Cell: ({ cell }) => {
                     const value = cell.getValue();
-                    let color;
+                    let color = '';
+                    let icon;
                     if (value === 'In progress') {
+                        icon = <AutorenewIcon/>
                         color = 'orange';
                     } else if (value === 'Done') {
+                        icon = <CheckCircleOutlineIcon/>
                         color = 'green';
                     } else if (value === 'Pending') {
+                        icon = <PendingActionsIcon/>
                         color = 'red';
                     } else {
                         color = 'black';
                     }
-                    return <div style={{ color }}> {value} </div>;
+                    return <div style={{ color }}> {icon} {value} </div>;
                 },
             },
             {
